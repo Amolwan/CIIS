@@ -21,7 +21,6 @@ function App() {
         <div className={"page-wrapper default-theme bg2 "+ style  }>
           <SideBar />
           <MainContent />
-          DDDD;
         </div>
       </GlobalAppContext.Provider>
     </Router>
@@ -29,3 +28,7 @@ function App() {
 }
 
 export default App;
+
+
+
+/* */
