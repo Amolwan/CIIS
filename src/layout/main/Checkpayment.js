@@ -1,31 +1,66 @@
-import React , { useContext } from 'react';
-import { GlobalAppContext } from '../../context';
+import React from 'react';
+import { MDBBtn, MDBTable, MDBTableBody, MDBTableHead  } from 'mdbreact';
 
-import reactLogo from '../../images/logo.svg'
+const Checkpayment = (props) => {
+  const columns= [
+    {
+      label: 'Order No',
+      field: 'order',
+      sort: 'asc'
+    },
+    {
+      label: 'Name',
+      field: 'name',
+      sort: 'asc'
+    },
+    {
+      label: 'Price',
+      field: 'price',
+      sort: 'asc'
+    },
+    {
+      label: 'Date',
+      field: 'date',
+      sort: 'asc'
+    },
+    {
+      label: 'Status Payment',
+      field: 'status',
+      sort: 'asc'
+    }
 
-function Checkpayment() {
+  ];
 
-const { toggled , setToggled , hasBackground, setHasBackground } = useContext(
-    GlobalAppContext
-);
+  const rows_rounded_btn = [
+    {
+      'order': 1,
+      'name': 'Name Researcher1',
+      'price': '12000',
+      'date': '-',
+      'status': <MDBBtn color="danger" rounded size="sm">UnPaid</MDBBtn>
+    },
+    {
+      'order': 2,
+      'name': 'Name Visiter',
+      'price': '8000',
+      'date': '-',
+      'status': <MDBBtn color="danger" rounded size="sm">Unpaid</MDBBtn>
+    },
+    {
+      'order': 3,
+      'name': 'Name Visiter',
+      'price': '8000',
+      'date': 'August 20,2020 10.30am',
+      'status': <MDBBtn color="success" rounded size="sm">Paid</MDBBtn>
+    }
+  ];
 
-    return (
-        <div class="container-fluid">
-            <div class="row">
-                <div class="form-group col-md-12">
-                    <h2> <img src={reactLogo} alt="React logo" width="100px" /> React Sidebar Template</h2>
-                    <hr />
-                    <p>This is a responsive sidebar template with dropdown menu built with React  16.8 and bootstrap 4.</p>
-                    <hr />
-                    <a href="#/" class="btn btn-outline-secondary mr-1" onClick={() =>setToggled(!toggled)}>Toggle Sidebar</a>
-                    <a href="#/" class="btn btn-secondary" onClick={() =>setHasBackground(!hasBackground)} >Toggle Background Image</a>
-                </div>
-            </div>
-            <div class="attribution text-center badge badge-warning">
-                React version of  <strong><a href="https://github.com/azouaoui-med/pro-sidebar-template">pro-sidebar-template</a> made by azouaoui mohamed</strong> 
-            </div>
-        </div>
-    )
-}
+  return(
+    <MDBTable btn>
+      <MDBTableHead columns={columns} />
+      <MDBTableBody rows={rows_rounded_btn} />
+    </MDBTable>
+  );
+};
 
 export default Checkpayment;
