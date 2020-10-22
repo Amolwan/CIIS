@@ -7,7 +7,7 @@
       },
       {
         "title": "Check Status",
-        "icon": "fa fa-tachometer-alt",
+        "icon": "fa fa-check-square",
         "active": false,
         "type":  "simple",
         "href":"/Status"
@@ -16,21 +16,21 @@
       },
       {
         "title": "Check Payments",
-        "icon": "fa fa-shopping-cart",
+        "icon": "fa fa-check-square",
         "active": false,
         "type":  "simple",
         "href":"/Checkpayment"
       },
       {
         "title": "All Research",
-        "icon": "far fa-gem",
+        "icon": "fa fa-list",
         "active": false,
         "type":  "simple",
         "href":"/Allresearch"
       },
       {
         "title": "Paid Research",
-        "icon": "fa fa-chart-line",
+        "icon": "fa fa-credit-card",
         "active": false,
         "type": "dropdown",
       "submenus": [
@@ -52,10 +52,17 @@
       
       {
         "title": "Unpaid Research",
-        "icon": "far fa-gem",
+        "icon": "fa fa-credit-card",
         "active": false,
         "type":  "simple",
         "href": "/Unpaid"
+      },
+      {
+        "title": "Data",
+        "icon": "fa fa-users",
+        "active": false,
+        "type":  "simple",
+        "href":"/ata"
       },
       {
         "title": "setting",
@@ -65,7 +72,7 @@
 
       {
         "title": "Edit",
-        "icon": "fa fa-chart-line",
+        "icon": "fa fa-cog",
         "active": false,
         "type": "dropdown",
       "submenus": [
@@ -85,7 +92,7 @@
       
       {
         "title": "Sign Out",
-        "icon": "fa fa-calendar",
+        "icon": "fa fa-user-circle",
         "active": false,
         "type": "simple",
         "href": "/Signout"

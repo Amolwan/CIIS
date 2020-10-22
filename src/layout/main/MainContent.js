@@ -9,6 +9,7 @@ import Unpaid from './Unpaid'
 import Edit from './Edit'
 import Reset from './Reset'
 import Signout from './Signout'
+import Data from './Data'
 import reactLogo from '../../images/head.png'
 
 
@@ -30,6 +31,7 @@ function MainContent() {
           <Route path='/Paypal' component={Paypal} />
           <Route path='/TMB' component={TMB} />
           <Route path='/Unpaid' exact component={Unpaid } />
+          <Route path='/Data' component={Data} />
           <Route path='/Edit' exact component={Edit } />
           <Route path='/Reset' exact component={Reset } />
           <Route path='/Signout' exact component={Signout } />
