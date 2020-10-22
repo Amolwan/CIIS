@@ -13,11 +13,13 @@ import reactLogo from '../../images/head.png'
 
 
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import SideBarMenu from '../sidebar/SideBarMenu';
 
 function MainContent() {
 
     return (
         <main class="page-content">
+          <SideBarMenu/>
           <img src={reactLogo} alt="React logo" width="100%" />
             <Router>
         <Switch>
