@@ -1,8 +1,13 @@
 import React from 'react';
-import { MDBBtn, MDBTable, MDBTableBody, MDBTableHead  } from 'mdbreact';
+import { MDBBtn, MDBTable, MDBTableBody, MDBTableHead, MDBInput  } from 'mdbreact';
 
 const Checkpayment = (props) => {
   const columns= [
+    {
+      label: '',
+      field: 'select',
+      sort: 'asc'
+    },
     {
       label: 'Order No',
       field: 'order',
@@ -33,6 +38,11 @@ const Checkpayment = (props) => {
 
   const rows_rounded_btn = [
     {
+      'select': <MDBInput
+      filled
+      type='checkbox'
+      id='checkbox1'
+      size="sm"/>,
       'order': 1,
       'name': 'Name Researcher1',
       'price': '12000',
@@ -40,6 +50,11 @@ const Checkpayment = (props) => {
       'status': <MDBBtn color="danger" rounded size="sm">UnPaid</MDBBtn>
     },
     {
+      'select': <MDBInput
+      filled
+      type='checkbox'
+      id='checkbox1'
+      size="sm"/>,
       'order': 2,
       'name': 'Name Visiter',
       'price': '8000',
@@ -47,6 +62,7 @@ const Checkpayment = (props) => {
       'status': <MDBBtn color="danger" rounded size="sm">Unpaid</MDBBtn>
     },
     {
+      'select': <MDBInput disabled type="checkbox" id="checkbox3" size="sm" />,
       'order': 3,
       'name': 'Name Visiter',
       'price': '8000',
