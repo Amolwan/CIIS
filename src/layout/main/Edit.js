@@ -18,7 +18,7 @@ export default class Edit extends Component {
                   <div class="form-row">
                   <div class="form-group col-md-6">
                       <label for="first-name">First Name *</label>
-                      <input type="first-name" class="form-control" id="first-name" placeholder="Your First-Name - ex.Chalinee......" />
+                      <input type="first-name" class="form-control" id="first-name" placeholder="Your First-Name - ex.Amolwan ......" />
                     </div>
                     {/* <div class="form-group col-md-6">
                       <label for="id">ID Card / Passport No. *</label>
