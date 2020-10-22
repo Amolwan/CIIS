@@ -88,7 +88,7 @@ function SideBarMenu() {
                 <Scrollbars
                     renderThumbVertical={ renderCustomHorizontalThumb }>
                     <div className="sidebar-item sidebar-brand">
-                        <a href="#/header">Admin</a>
+                        <a href="#/header">Finance</a>
                     </div>
                     <div className="sidebar-item sidebar-header d-flex flex-nowrap">
                         <div className="user-pic">
@@ -98,7 +98,7 @@ function SideBarMenu() {
                             <span className="user-name">Jhon 
                                 <strong> Smith</strong>
                             </span>
-                            <span className="user-role"> Administrator</span>
+                            <span className="user-role"> Finance</span>
                             <span className="user-status">
                                 <i className="fa fa-circle"></i>
                                 <span> Online</span>
