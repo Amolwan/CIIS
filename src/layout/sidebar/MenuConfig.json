@@ -1,0 +1,82 @@
+
+    {
+      "menus": [
+      {
+        "title": "Menu",
+        "type": "header"
+      },
+      {
+        "title": "Check Status",
+        "icon": "fa fa-tachometer-alt",
+        "active": false,
+        "type":  "simple",
+        "href":"/Status"
+        
+        
+      },
+      {
+        "title": "Check Payments",
+        "icon": "fa fa-shopping-cart",
+        "active": false,
+        "type":  "simple",
+        "href":"/Checkpayment"
+      },
+      {
+        "title": "All Research",
+        "icon": "far fa-gem",
+        "active": false,
+        "type":  "simple",
+        "href":"/Allresearch"
+      },
+      {
+        "title": "Paid Research",
+        "icon": "fa fa-chart-line",
+        "active": false,
+        "type": "dropdown",
+      "submenus": [
+        {
+          "title": "Total",
+          "href": "/Total"
+          
+        },
+        {
+          "title": "Paypal",
+          "href": "/Paypal"
+        },
+        {
+          "title": "TMB",
+          "href": "/TMB"
+        }
+      ]
+      },
+
+      {
+        "title": "Unpaid Research",
+        "icon": "far fa-gem",
+        "active": false,
+        "type":  "simple",
+        "href": "/Unpaid"
+      },
+  
+      {
+        "title": "setting",
+        "type": "header"
+    
+      },
+  
+      {
+        "title": "Edit",
+        "icon": "fa fa-book",
+        "active": false,
+        "type": "simple",
+        "href": "/Edit"
+      },
+      {
+        "title": "Sign Out",
+        "icon": "fa fa-calendar",
+        "active": false,
+        "type": "simple",
+        "href": "/Signout"
+      }
+    ]
+  }
