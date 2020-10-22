@@ -63,14 +63,27 @@
         "type": "header"
     
       },
-  
+
       {
         "title": "Edit",
-        "icon": "fa fa-book",
+        "icon": "fa fa-chart-line",
         "active": false,
-        "type": "simple",
-        "href": "/Edit"
+        "type": "dropdown",
+      "submenus": [
+        {
+          "title": "Add admin",
+          "href": "/Edit"
+          
+        },
+        {
+          "title": "Reset",
+          "href": "/Reset"
+        }
+        
+      ]
       },
+  
+      
       {
         "title": "Sign Out",
         "icon": "fa fa-calendar",
