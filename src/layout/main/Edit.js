@@ -3,7 +3,7 @@ import React from 'react';
 function Edit() {
   return (
     <div className='edit'>
-      Edit
+      Editttt
     </div>
   );
 }
