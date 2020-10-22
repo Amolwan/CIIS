@@ -2,8 +2,6 @@ import React, { Component } from "react";
 // import { Form } from 'semantic-ui-react'
 import '../../styles/register.css';
 
-
-
 export default class Register extends Component {
   render() {
     return (
@@ -75,3 +73,4 @@ export default class Register extends Component {
     );
 }
 }
+
