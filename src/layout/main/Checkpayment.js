@@ -67,7 +67,7 @@ const Checkpayment = (props) => {
       'name': 'Name Visiter',
       'price': '8000',
       'date': 'August 20,2020 10.30am',
-      'status': <MDBBtn color="success" rounded size="sm">Pass</MDBBtn>
+      'status': <MDBBtn color="success" rounded size="sm">Paid</MDBBtn>
     }
   ];
 
