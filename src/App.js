@@ -19,7 +19,7 @@ function App() {
         value={{toggled, setToggled, hasBackground, setHasBackground}}  
       >
         <div className={"page-wrapper default-theme bg2 "+ style  }>
-          <SideBar />
+        
           <MainContent />
         </div>
       </GlobalAppContext.Provider>

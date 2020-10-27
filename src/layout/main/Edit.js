@@ -1,10 +1,15 @@
 import React, { Component } from "react";
 // import { Form } from 'semantic-ui-react'
 import '../../styles/register.css';
+import reactLogo from '../../images/head.png'
+import SideBarMenu from '../sidebar/SideBarMenu';
 
 export default class Register extends Component {
   render() {
     return (
+      <main >
+       <SideBarMenu/>
+      <img src={reactLogo} alt="React logo" width="100%" />
         <form>
             <div className="auth-wrapper">
                 <div className="auth-inner">
@@ -70,6 +75,7 @@ export default class Register extends Component {
                 </div>
             </div>
         </form>
+        </main>
     );
 }
 }

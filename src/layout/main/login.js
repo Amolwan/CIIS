@@ -1,40 +1,15 @@
-
+import React, { Component } from "react";
 import '../../styles/login.css';
 import user from '../../images/user.png'
+import { Link } from 'react-router-dom';
 import './Status'
+import './MainContent'
 
-
-import React, {useContext} from 'react';
-import {firebaseAuth} from '../../provider/AuthProvider'
-
-
-const Signin = () => {
-
-
-    const {handleSignin, inputs, setInputs, errors} = useContext(firebaseAuth)
-    
-    const handleSubmit = (e) => {
-      e.preventDefault()
-      console.log('handleSubmit')
-      handleSignin()
-      
-    }
-    const handleChange = e => {
-      const {name, value} = e.target
-      console.log(inputs)
-      setInputs(prev => ({...prev, [name]: value}))
-    }
-  
-    return (
-      <form onSubmit={handleSubmit}>
-
-        
-        
-        
-       
-
-
-        <div className="auth-wrapper-log">
+export default class Login extends Component {
+    render() {
+        return (
+            <form>
+                <div className="auth-wrapper-log">
                     <div className="auth-inner-log">
                         <div class="text-center">
                             <img src={user} width="70px" /> 
@@ -44,35 +19,33 @@ const Signin = () => {
                         </div>
                         
                         <div className="form-group1">
-                            <label>Email *</label>
+                            <label>Email or Username *</label>
                         </div>
                         
-                        <input onChange={handleChange} name="email" placeholder='email' value={inputs.email} />
+                            <input type="email" className="form-control1" placeholder="email" />
                         
 
                         <div className="form-group1">
                             <label>Password *</label>
                         </div>
                         
-                        <input onChange={handleChange} name="password" placeholder='password' value={inputs.password} />
+                            <input type="password" className="form-control1" placeholder="password" />
                         
 
                         <p className="forgot-password text-right">
                             Forgot <a href="#">password?</a>
                         </p>
 
-
-                        <button>signin</button>
-
+                        <Link to="/Allresearch">
+                            <button type="button" class="btn1 btn-secondary ">SIGN IN</button>
+                        </Link>
 
                             <p className="dont-have-account">
                                 Don't have account? <a href="#">Register</a>
                             </p>
-                            {errors.length > 0 ? errors.map(error => <p style={{color: 'red'}}>{error}</p> ) : null}
                     </div>
                 </div>
-      </form>
-    );
-  };
-  
-  export default Signin;
+            </form>
+        );
+    }
+}
