@@ -36,7 +36,7 @@ export default class Login extends Component {
                             Forgot <a href="#">password?</a>
                         </p>
 
-                        <Link to="/Allresearch">
+                        <Link to="/Status">
                             <button type="button" class="btn1 btn-secondary ">SIGN IN</button>
                         </Link>
 
