@@ -47,7 +47,7 @@ const Checkpayment = (props) => {
       'name': 'Name Researcher1',
       'price': '12000',
       'date': '-',
-      'status': <MDBBtn color="danger" rounded size="sm">UnPaid</MDBBtn>
+      'status': <h6 style={{color: 'red'}}>Unpaid</h6>
     },
     {
       'select': <MDBInput
@@ -59,7 +59,7 @@ const Checkpayment = (props) => {
       'name': 'Name Visiter',
       'price': '8000',
       'date': '-',
-      'status': <MDBBtn color="danger" rounded size="sm">Unpaid</MDBBtn>
+      'status': <h6 style={{color: 'red'}}>Unpaid</h6>
     },
     {
       'select': <MDBInput disabled type="checkbox" id="checkbox3" size="sm" />,
@@ -67,7 +67,7 @@ const Checkpayment = (props) => {
       'name': 'Name Visiter',
       'price': '8000',
       'date': 'August 20,2020 10.30am',
-      'status': <MDBBtn color="success" rounded size="sm">Paid</MDBBtn>
+      'status': <h6 style={{color: 'green'}}>Paid</h6>
     }
   ];
 
