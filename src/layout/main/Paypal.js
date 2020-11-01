@@ -1,5 +1,5 @@
 import React from 'react';
-import { MDBBtn, MDBTable, MDBTableBody, MDBTableHead  } from 'mdbreact';
+import { MDBTable, MDBTableBody, MDBTableHead  } from 'mdbreact';
 import reactLogo from '../../images/head.png'
 import SideBarMenu from '../sidebar/SideBarMenu';
 
@@ -45,14 +45,14 @@ const Paypal = (props) => {
   ];
 
   return(
-    <main >
+    <div >
     <SideBarMenu/>
    <img src={reactLogo} alt="React logo" width="100%" />
     <MDBTable btn>
       <MDBTableHead columns={columns} />
       <MDBTableBody rows={rows_rounded_btn} />
     </MDBTable>
-    </main>
+    </div>
   );
 };
 

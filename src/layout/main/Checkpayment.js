@@ -58,14 +58,14 @@ const Checkpayment = (props) => {
   ];
 
   return(
-    <main >
+    <div >
        <SideBarMenu/>
       <img src={reactLogo} alt="React logo" width="100%" />
     <MDBTable btn>
       <MDBTableHead columns={columns} />
       <MDBTableBody rows={rows_rounded_btn} />
     </MDBTable>
-    </main>
+    </div>
   );
 };
 

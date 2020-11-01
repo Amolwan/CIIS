@@ -1,5 +1,4 @@
-import React from 'react';
-import Status from './Status'
+import React, { Component } from 'react';
 import Checkpayment from './Checkpayment'
 import Allresearch from './Allresearch'
 import Total from './Total'
@@ -7,37 +6,89 @@ import Paypal from './Paypal'
 import TMB from './TMB'
 import Unpaid from './Unpaid'
 import Edit from './Edit'
-import Signout from './Signout'
 
-import login from './login'
+import {
+  Route,
+  BrowserRouter as Router,
+  Switch,
+  Redirect,
+} from "react-router-dom";
+import Login from './login';
 
-import reactLogo from '../../images/head.png'
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import SideBarMenu from '../sidebar/SideBarMenu';
+import Status from './Status';
+import Signout from './Signout';
+import { auth } from '../../services/firebase';
 
-function MainContent() {
+function PrivateRoute({ component: Component, authenticated, ...rest }) {
+  return (
+    <Route
+      {...rest}
+      render={(props) => authenticated === true
+        ? <Component {...props} />
+        : <Redirect to={{ pathname: '/login', state: { from: props.location } }} />}
+    />
+  )
+}
 
-    return (
-        <main class="page-content">
-            <Router>
+function PublicRoute({ component: Component, authenticated, ...rest }) {
+  return (
+    <Route
+      {...rest}
+      render={(props) => authenticated === false
+        ? <Component {...props} />
+        : <Redirect to='/Status' />}
+    />
+  )
+}
+
+class MainContent extends Component {
+
+  constructor() {
+    super();
+    this.state = {
+      authenticated: false,
+      loading: true,
+    };
+  }
+
+  componentDidMount() {
+    auth().onAuthStateChanged((user) => {
+      if (user) {
+        this.setState({
+          authenticated: true,
+          loading: false,
+        });
+      } else {
+        this.setState({
+          authenticated: false,
+          loading: false,
+        });
+      }
+    })
+  }
+
+  render() {
+    return this.state.loading === true ? <h2>Loading...</h2> : (
+      <main class="page-content">
+        <Router>
         <Switch>
-          <Route exact path = '/' component = {login} />
-          <Route path='/Status' component={Status} />
-          <Route path='/Checkpayment' component={Checkpayment } />
-          <Route path='/Allresearch' component={Allresearch} />
-          <Route path='/Total' component={Total} />
-          <Route path='/Paypal' component={Paypal} />
-          <Route path='/TMB' component={TMB} />
-          <Route path='/Unpaid' component={Unpaid } />
-          <Route path='/Edit' component={Edit } />
-          <Route path='/Signout' component={Signout } />
-          
+          <Route exact path="/" component={Signout}></Route>
+          <PrivateRoute path="/Status" authenticated={this.state.authenticated} component={Status}></PrivateRoute>
+          <PrivateRoute path="/Checkpayment" authenticated={this.state.authenticated} component={Checkpayment}></PrivateRoute>
+          <PrivateRoute path="/Allresearch" authenticated={this.state.authenticated} component={Allresearch}></PrivateRoute>
+          <PrivateRoute path="/Total" authenticated={this.state.authenticated} component={Total}></PrivateRoute>
+          <PrivateRoute path="/Paypal" authenticated={this.state.authenticated} component={Paypal}></PrivateRoute>
+          <PrivateRoute path="/TMB" authenticated={this.state.authenticated} component={TMB}></PrivateRoute>
+          <PrivateRoute path="/Unpaid" authenticated={this.state.authenticated} component={Unpaid}></PrivateRoute>
+          <PrivateRoute path="/Edit" authenticated={this.state.authenticated} component={Edit}></PrivateRoute>
+          <PublicRoute path="/login" authenticated={this.state.authenticated} component={Login}></PublicRoute>
+          <PrivateRoute path="/Signout" authenticated={this.state.authenticated} component={Signout}></PrivateRoute>
         </Switch>
-      </Router>
-        </main>
 
-    )
+      </Router></main>
+      
+    );
+  }
 }
 
 export default MainContent;
-

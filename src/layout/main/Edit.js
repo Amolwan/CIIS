@@ -7,7 +7,7 @@ import SideBarMenu from '../sidebar/SideBarMenu';
 export default class Register extends Component {
   render() {
     return (
-      <main >
+      <div >
        <SideBarMenu/>
       <img src={reactLogo} alt="React logo" width="100%" />
         <form>
@@ -75,7 +75,7 @@ export default class Register extends Component {
                 </div>
             </div>
         </form>
-        </main>
+        </div>
     );
 }
 }

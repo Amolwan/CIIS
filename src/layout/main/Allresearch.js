@@ -3,7 +3,7 @@ import { MDBBtn, MDBTable, MDBTableBody, MDBTableHead  } from 'mdbreact';
 import reactLogo from '../../images/head.png'
 import SideBarMenu from '../sidebar/SideBarMenu';
 
-const Checkpayment = (props) => {
+const Allresearch = (props) => {
   const columns= [
     {
       label: 'Order No',
@@ -59,7 +59,7 @@ const Checkpayment = (props) => {
 
   return(
     
-    <main >
+    <div >
        <SideBarMenu/>
       <img src={reactLogo} alt="React logo" width="100%" />
       <MDBTable btn>
@@ -67,8 +67,8 @@ const Checkpayment = (props) => {
       <MDBTableBody rows={rows_rounded_btn} />
     </MDBTable>
      
-    </main>
+    </div>
   );
 };
 
-export default Checkpayment;
+export default Allresearch;
