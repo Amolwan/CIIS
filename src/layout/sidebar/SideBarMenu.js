@@ -7,7 +7,10 @@ import SimpleMenu from './SimpleMenu';
 import Dropdown from 'react-bootstrap/Dropdown';
 
 import userImage from '../../images/user.jpg';
-
+// import { ReactComponent } from '*.svg';
+import {CheckStatus} from '../main/MainContent'
+import { auth,db } from '../../services/firebase';
+import firebase from 'firebase'
 
 let renderCustomHorizontalThumb = ({ style, ...props }) => {
                         
@@ -22,9 +25,17 @@ let renderCustomHorizontalThumb = ({ style, ...props }) => {
             {...props}/>
     );
 }
-
-
-
+function call()
+{
+    let AdminStatus = CheckStatus();
+    if (AdminStatus){
+        return auth().currentUser.uid
+    }
+    else
+    {
+        return "BBBB"
+    }
+}
 
 function SideBarMenu() {
 
@@ -81,8 +92,8 @@ function SideBarMenu() {
           {children}
         </a>
     ));
-
     return (
+        
         <nav id="sidebar" className="sidebar-wrapper">
             <div className="sidebar-content">
                 <Scrollbars
@@ -95,7 +106,7 @@ function SideBarMenu() {
                             <img className="img-responsive img-rounded" src={userImage} alt="User " />
                         </div>
                         <div className="user-info">
-                            <span className="user-name">Jhon 
+                            <span className="user-name">{call()}
                                 <strong> Smith</strong>
                             </span>
                             <span className="user-role"> Administrator</span>

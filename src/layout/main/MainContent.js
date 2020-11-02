@@ -1,3 +1,10 @@
+import {
+  Route,
+  BrowserRouter as Router,
+  Switch,
+  Redirect,
+} from "react-router-dom";
+import Login from './login';
 import React, { Component } from 'react';
 import Checkpayment from './Checkpayment'
 import Allresearch from './Allresearch'
@@ -7,18 +14,9 @@ import TMB from './TMB'
 import Unpaid from './Unpaid'
 import Edit from './Edit'
 import Home from './Home'
-
-import {
-  Route,
-  BrowserRouter as Router,
-  Switch,
-  Redirect,
-} from "react-router-dom";
-import Login from './login';
-
 import Status from './Status';
 import Signout from './Signout';
-import { auth } from '../../services/firebase';
+import { auth,db } from '../../services/firebase';
 
 function PrivateRoute({ component: Component, authenticated, ...rest }) {
   return (
@@ -30,7 +28,26 @@ function PrivateRoute({ component: Component, authenticated, ...rest }) {
     />
   )
 }
-
+export async function CheckStatus(){
+  return new Promise((resolve,reject)=>{
+      let uid = auth().currentUser.uid;
+      let bool = false;
+      var ref =  db.ref("Admin/");
+      ref.once("value").then(async function(snapshot) {
+        await snapshot.forEach( function(snap) {
+        
+          if(uid === snap.key)
+          {
+            bool =  true;
+            console.log(uid);
+            console.log(snap.key)
+            resolve(bool);
+          }
+      })
+    });
+    reject(bool);
+  })
+}
 function PublicRoute({ component: Component, authenticated, ...rest }) {
   return (
     <Route
@@ -41,7 +58,6 @@ function PublicRoute({ component: Component, authenticated, ...rest }) {
     />
   )
 }
-
 class MainContent extends Component {
 
   constructor() {
@@ -49,8 +65,10 @@ class MainContent extends Component {
     this.state = {
       authenticated: false,
       loading: true,
+    
     };
   }
+
 
   componentDidMount() {
     auth().onAuthStateChanged((user) => {
@@ -58,7 +76,8 @@ class MainContent extends Component {
         this.setState({
           authenticated: true,
           loading: false,
-        });
+      
+        })
       } else {
         this.setState({
           authenticated: false,
@@ -67,7 +86,7 @@ class MainContent extends Component {
       }
     })
   }
-
+ 
   render() {
     return this.state.loading === true ? <h2>Loading...</h2> : (
 
@@ -84,8 +103,7 @@ class MainContent extends Component {
           <PrivateRoute path="/Edit" authenticated={this.state.authenticated} component={Edit}></PrivateRoute>
           <PublicRoute path="/login" authenticated={this.state.authenticated} component={Login}></PublicRoute>
           <PrivateRoute path="/Signout" authenticated={this.state.authenticated} component={Signout}></PrivateRoute>
-          <PrivateRoute path="/Home" authenticated={this.state.authenticated} component={Home}></PrivateRoute>
-        </Switch>
+          <PublicRoute path="/Home" authenticated={this.state.authenticated} component={Home}></PublicRoute>        </Switch>
 
       </Router>
     );
