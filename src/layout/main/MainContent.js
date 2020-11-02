@@ -1,5 +1,4 @@
-import React from 'react';
-import Status from './Status'
+import React, { Component } from 'react';
 import Checkpayment from './Checkpayment'
 import Allresearch from './Allresearch'
 import Total from './Total'
@@ -13,16 +12,62 @@ import Data from './Data'
 import reactLogo from '../../images/head.png'
 import Login from './Login'
 
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import SideBarMenu from '../sidebar/SideBarMenu';
+import Status from './Status';
+import Signout from './Signout';
+import { auth } from '../../services/firebase';
 
-function MainContent() {
+function PrivateRoute({ component: Component, authenticated, ...rest }) {
+  return (
+    <Route
+      {...rest}
+      render={(props) => authenticated === true
+        ? <Component {...props} />
+        : <Redirect to={{ pathname: '/login', state: { from: props.location } }} />}
+    />
+  )
+}
 
-    return (
-        <main class="page-content">
-          <SideBarMenu/>
-          <img src={reactLogo} alt="React logo" width="100%" />
-            <Router>
+function PublicRoute({ component: Component, authenticated, ...rest }) {
+  return (
+    <Route
+      {...rest}
+      render={(props) => authenticated === false
+        ? <Component {...props} />
+        : <Redirect to='/Status' />}
+    />
+  )
+}
+
+class MainContent extends Component {
+
+  constructor() {
+    super();
+    this.state = {
+      authenticated: false,
+      loading: true,
+    };
+  }
+
+  componentDidMount() {
+    auth().onAuthStateChanged((user) => {
+      if (user) {
+        this.setState({
+          authenticated: true,
+          loading: false,
+        });
+      } else {
+        this.setState({
+          authenticated: false,
+          loading: false,
+        });
+      }
+    })
+  }
+
+  render() {
+    return this.state.loading === true ? <h2>Loading...</h2> : (
+
+        <Router>
         <Switch>
           <Route path='/Status' component={Status} />
           <Route path='/Checkpayment' exact component={Checkpayment } />
@@ -37,11 +82,10 @@ function MainContent() {
           <Route path='/Signout' exact component={Signout } />
           <Route path='/Login' exact component={Login } />
         </Switch>
-      </Router>
-        </main>
 
-    )
+      </Router>
+    );
+  }
 }
 
 export default MainContent;
-
