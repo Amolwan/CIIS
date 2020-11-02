@@ -6,6 +6,7 @@ import Paypal from './Paypal'
 import TMB from './TMB'
 import Unpaid from './Unpaid'
 import Edit from './Edit'
+import Home from './Home'
 
 import {
   Route,
@@ -69,10 +70,10 @@ class MainContent extends Component {
 
   render() {
     return this.state.loading === true ? <h2>Loading...</h2> : (
-      <main class="page-content">
+
         <Router>
         <Switch>
-          <Route exact path="/" component={Signout}></Route>
+          <Route exact path="/" component={Home}></Route>
           <PrivateRoute path="/Status" authenticated={this.state.authenticated} component={Status}></PrivateRoute>
           <PrivateRoute path="/Checkpayment" authenticated={this.state.authenticated} component={Checkpayment}></PrivateRoute>
           <PrivateRoute path="/Allresearch" authenticated={this.state.authenticated} component={Allresearch}></PrivateRoute>
@@ -83,10 +84,10 @@ class MainContent extends Component {
           <PrivateRoute path="/Edit" authenticated={this.state.authenticated} component={Edit}></PrivateRoute>
           <PublicRoute path="/login" authenticated={this.state.authenticated} component={Login}></PublicRoute>
           <PrivateRoute path="/Signout" authenticated={this.state.authenticated} component={Signout}></PrivateRoute>
+          <PrivateRoute path="/Home" authenticated={this.state.authenticated} component={Home}></PrivateRoute>
         </Switch>
 
-      </Router></main>
-      
+      </Router>
     );
   }
 }

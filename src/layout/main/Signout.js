@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { auth } from "../../services/firebase";
 
 
-export default class HomePage extends Component {
+export default class Logout extends Component {
   render() {
     return (
         <header>

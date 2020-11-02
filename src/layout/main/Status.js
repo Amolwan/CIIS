@@ -58,7 +58,7 @@ const Status = (props) => {
   ];
 
   return(
-    <div >
+    <div  class="page-content">
     <SideBarMenu/>
    <img src={reactLogo} alt="React logo" width="100%" />
     <MDBTable btn>
