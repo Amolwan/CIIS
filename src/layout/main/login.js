@@ -1,40 +1,45 @@
-
+/* eslint-disable jsx-a11y/anchor-is-valid */
+/* eslint-disable jsx-a11y/alt-text */
+import React, { Component } from "react";
 import '../../styles/login.css';
 import user from '../../images/user.png'
 import './Status'
+import './MainContent'
+import { signin } from '../../helpers/auth';
 
+export default class Login extends Component {
 
-import React, {useContext} from 'react';
-import {firebaseAuth} from '../../provider/AuthProvider'
-
-
-const Signin = () => {
-
-
-    const {handleSignin, inputs, setInputs, errors} = useContext(firebaseAuth)
-    
-    const handleSubmit = (e) => {
-      e.preventDefault()
-      console.log('handleSubmit')
-      handleSignin()
-      
-    }
-    const handleChange = e => {
-      const {name, value} = e.target
-      console.log(inputs)
-      setInputs(prev => ({...prev, [name]: value}))
+    constructor() {
+      super();
+      this.state = {
+        error: null,
+        email: '',
+        password: '',
+      };
+      this.handleChange = this.handleChange.bind(this);
+      this.handleSubmit = this.handleSubmit.bind(this);
     }
   
-    return (
-      <form onSubmit={handleSubmit}>
-
-        
-        
-        
-       
-
-
-        <div className="auth-wrapper-log">
+    handleChange(event) {
+      this.setState({
+        [event.target.name]: event.target.value
+      });
+    }
+  
+    async handleSubmit(event) {
+      event.preventDefault();
+      this.setState({ error: '' });
+      try {
+        await signin(this.state.email, this.state.password);
+      } catch (error) {
+        this.setState({ error: error.message });
+      }
+    }
+  
+    render() {
+        return (
+            <form autoComplete="off" onSubmit={this.handleSubmit}>
+                <div className="auth-wrapper-log">
                     <div className="auth-inner-log">
                         <div class="text-center">
                             <img src={user} width="70px" /> 
@@ -44,35 +49,34 @@ const Signin = () => {
                         </div>
                         
                         <div className="form-group1">
-                            <label>Email *</label>
+                            <label>Email or Username *</label>
                         </div>
                         
-                        <input onChange={handleChange} name="email" placeholder='email' value={inputs.email} />
+                        <input className="form-control1" placeholder="Email" name="email" type="email" onChange={this.handleChange} value={this.state.email}></input>
                         
 
                         <div className="form-group1">
                             <label>Password *</label>
                         </div>
                         
-                        <input onChange={handleChange} name="password" placeholder='password' value={inputs.password} />
+                        <input className="form-control1" placeholder="Password" name="password" onChange={this.handleChange} value={this.state.password} type="password"></input>
                         
 
                         <p className="forgot-password text-right">
                             Forgot <a href="#">password?</a>
                         </p>
 
-
-                        <button>signin</button>
-
+                        <div className="form-group1">
+            {this.state.error ? <p className="text-danger">{this.state.error}</p> : null}
+            <button className="btn1 btn-secondary">Login</button>
+          </div>
 
                             <p className="dont-have-account">
                                 Don't have account? <a href="#">Register</a>
                             </p>
-                            {errors.length > 0 ? errors.map(error => <p style={{color: 'red'}}>{error}</p> ) : null}
                     </div>
                 </div>
-      </form>
-    );
-  };
-  
-  export default Signin;
+            </form>
+        );
+    }
+}

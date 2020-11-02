@@ -1,6 +1,6 @@
-import firebase from 'firebase'
+import firebase from 'firebase';
 
-var firebaseConfig = {
+const firebaseConfig = {
   apiKey: "AIzaSyDckgWOsIXhWuKP3ywqHKpCSPZj9PtVu_s",
   authDomain: "loginse-5c3bd.firebaseapp.com",
   databaseURL: "https://loginse-5c3bd.firebaseio.com",
@@ -13,7 +13,9 @@ var firebaseConfig = {
 
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
-firebase.analytics();
-export const auth = firebase.auth;
-export const db = firebase.database();
+export default firebase;
+// firebase.initializeApp(firebaseConfig);
+// firebase.analytics();
+// export const auth = firebase.auth;
+// export const db = firebase.database();
 

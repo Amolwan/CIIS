@@ -1,66 +1,89 @@
 import React from 'react';
 import { MDBBtn, MDBTable, MDBTableBody, MDBTableHead  } from 'mdbreact';
+// import firebase from 'firebase';
+import firebase from '../../firebase/firebaseIndex';
 
-const Status = (props) => {
-  const columns= [
-    {
-      label: 'Order No',
-      field: 'order',
-      sort: 'asc'
-    },
-    {
-      label: 'Name',
-      field: 'name',
-      sort: 'asc'
-    },
-    {
-      label: 'Verify By',
-      field: 'by',
-      sort: 'asc'
-    },
-    {
-      label: 'Date',
-      field: 'date',
-      sort: 'asc'
-    },
-    {
-      label: 'Status Payment',
-      field: 'status',
-      sort: 'asc'
-    }
+class Status extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {datalist : []};
+    this.database = firebase.database();
+    this.mySubmitHandler = this.mySubmitHandler.bind(this);
+  }
+  componentDidMount(){
+   
+    firebase.database().ref('Resercher/').on("value",snapshot => {
+      let Resercherlist = [];
+      snapshot.forEach(snap => {
+        if(snap.val().Status == "Unpair")
+        {
+          Resercherlist.push(snap.val());
+        }
+        // {console.log(snap.key)}
+      })
+      // console.log(Resercherlist);
+      this.setState({datalist : Resercherlist});
+    })
+  }
 
-  ];
+  mySubmitHandler(event){
+    event.preventDefault();
+    console.log([event.target.id])
+    console.log(this.state.datalist[event.target.id].note_id)
+    firebase.database().ref('Resercher/').on("value",snapshot => {
+      snapshot.forEach(snap => {
+        if(snap.val().note_id == this.state.datalist[event.target.id].note_id)
+        {
+            let userRef = this.database.ref('Resercher/' + snap.key)
+            userRef.update({'Status': "Pay"});
+        }
+      })
+      // console.log(data.key)
+    })
+    alert("You are submitting " + this.state.datalist[event.target.id].Name);
+  }
+  
+  render(){
+    return (
+      <div className="MainDiv">
+        <div className="container">
+            <table id="example" class="display table">
+              <thead class="thead-dark">
+                  <tr>
+                      <th>Order No.</th>
+                      <th>Name</th>
+                      <th>Verify by</th>
+                      <th>Date</th>
+                      <th>Status Payment</th>
+                  </tr>
+              </thead>
+              <tbody>  
+              {this.state.datalist.map((data,index) => {
+                // {console.log(index)}
+                  return (
+                      <tr> 
+                        
+                        {/* {console.log(data)} */}
+                        <td>{data.Name}</td>
+                        <td>{data.Name}</td>
+                        <td>{data.Price}</td>
+                        {/* <td>{data.Status}</td> */}
+                        <td>{data.Date}</td>
+                        <td><input style={{}} className="w3-input-transparent" type="submit" id={index} value={data.Status} onClick={this.mySubmitHandler}/></td>
 
-  const rows_rounded_btn = [
-    {
-      'order': 1,
-      'name': 'Name Researcher1',
-      'by': 'NameFinance',
-      'date': 'August 20,2020 10.30am',
-      'status': <MDBBtn color="success" rounded size="sm">Pass</MDBBtn>
-    },
-    {
-      'order': 2,
-      'name': 'Jacob',
-      'by': 'NameFinance',
-      'date': 'August',
-      'status': <MDBBtn color="success" rounded size="sm">Pass</MDBBtn>
-    },
-    {
-      'order': 3,
-      'name': 'Larry',
-      'by': 'NameFinance',
-      'date': 'August',
-      'status': <MDBBtn color="success" rounded size="sm">Pass</MDBBtn>
-    }
-  ];
-
-  return(
-    <MDBTable btn>
-      <MDBTableHead columns={columns} />
-      <MDBTableBody rows={rows_rounded_btn} />
-    </MDBTable>
-  );
+                      </tr> 
+                  );
+                  
+                  })}
+              
+              
+              </tbody>
+           </table>
+       </div>
+      </div>
+    );
+  }
+  
 };
 
 export default Status;
