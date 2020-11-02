@@ -1,5 +1,7 @@
 import React from 'react';
-import { MDBBtn, MDBTable, MDBTableBody, MDBTableHead  } from 'mdbreact';
+import { MDBTable, MDBTableBody, MDBTableHead  } from 'mdbreact';
+import reactLogo from '../../images/head.png'
+import SideBarMenu from '../sidebar/SideBarMenu';
 
 const TMB = (props) => {
   const columns= [
@@ -49,10 +51,14 @@ const TMB = (props) => {
   ];
 
   return(
+    <div  class="page-content" >
+    <SideBarMenu/>
+   <img src={reactLogo} alt="React logo" width="100%" />
     <MDBTable btn>
       <MDBTableHead columns={columns} />
       <MDBTableBody rows={rows_rounded_btn} />
     </MDBTable>
+    </div>
   );
 };
 

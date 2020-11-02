@@ -2,6 +2,8 @@ import React from 'react';
 import { MDBBtn, MDBTable, MDBTableBody, MDBTableHead  } from 'mdbreact';
 // import firebase from 'firebase';
 import firebase from '../../firebase/firebaseIndex';
+import reactLogo from '../../images/head.png'
+import SideBarMenu from '../sidebar/SideBarMenu';
 
 class Checkpayment extends React.Component {
   constructor(props) {
