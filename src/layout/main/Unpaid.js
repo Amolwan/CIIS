@@ -52,8 +52,7 @@ class Unpaid extends React.Component {
               <thead class="thead-dark">
                   <tr>
                       <th>Order No.</th>
-                      <th>Name</th>
-                      
+                      <th>Name</th>                      
                       <th>Name Research</th>
                       <th>Price</th>
                   </tr>

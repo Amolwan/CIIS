@@ -62,7 +62,7 @@
         "icon": "fa fa-users",
         "active": false,
         "type":  "simple",
-        "href":"/ata"
+        "href":"/data"
       },
       {
         "title": "setting",

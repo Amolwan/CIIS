@@ -18,7 +18,9 @@ class Status extends React.Component {
       snapshot.forEach(snap => {
         if(snap.val().Status == "Unpaid")
         {
+          
           Resercherlist.push(snap.val());
+        
         }
         // {console.log(snap.key)}
       })
@@ -37,6 +39,7 @@ class Status extends React.Component {
         {
             let userRef = this.database.ref('Resercher/' + snap.key)
             userRef.update({'Status': "Paid"});
+            userRef.update({'Status_Ad' : "Paid"});
         }
       })
       // console.log(data.key)

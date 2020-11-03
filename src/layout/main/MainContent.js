@@ -12,6 +12,7 @@ import Signout from './Signout'
 import Data from './Data'
 import reactLogo from '../../images/head.png'
 import login from './login'
+import re from './regis'
 
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import SideBarMenu from '../sidebar/SideBarMenu';
@@ -32,7 +33,7 @@ function MainContent() {
           <Route path='/TMB' component={TMB} />
           <Route path='/Unpaid' exact component={Unpaid } />
           <Route path='/Data' component={Data} />
-          <Route path='/Edit' exact component={Edit } />
+          <Route path='/Edit' exact component={re } />
           <Route path='/Reset' exact component={Reset } />
           <Route path='/Signout' exact component={Signout } />
           <Route path='/login' exact component={login } />
