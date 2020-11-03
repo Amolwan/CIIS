@@ -2,6 +2,17 @@ import React from 'react';
 import { MDBBtn, MDBTable, MDBTableBody, MDBTableHead  } from 'mdbreact';
 // import firebase from 'firebase';
 import firebase from '../../firebase/firebaseIndex';
+import { ButtonBase } from '@material-ui/core';
+function Btn(data){
+  if(data == "Unpaid")
+  {
+    return "Unpaid"
+  }
+  else
+  {
+    return "Paid"
+  }
+}
 
 class Checkpayment extends React.Component {
   constructor(props) {
@@ -15,7 +26,7 @@ class Checkpayment extends React.Component {
     firebase.database().ref('Resercher/').on("value",snapshot => {
       let Resercherlist = [];
       snapshot.forEach(snap => {
-        if(snap.val().Status == "Unpair")
+        if(snap.val().Status == "Unpaid" || snap.val().Status == "Paid")
         {
           Resercherlist.push(snap.val());
         }
@@ -30,70 +41,28 @@ class Checkpayment extends React.Component {
     event.preventDefault();
     console.log([event.target.id])
     console.log(this.state.datalist[event.target.id].note_id)
-    firebase.database().ref('Resercher/').on("value",snapshot => {
+    firebase.database().ref('Resercher/').once("value",snapshot => {
       snapshot.forEach(snap => {
         if(snap.val().note_id == this.state.datalist[event.target.id].note_id)
         {
+          if(snap.val().Status == "Unpaid")
+          {
             let userRef = this.database.ref('Resercher/' + snap.key)
-            userRef.update({'Status': "Pay"});
+            userRef.update({'Status': "Paid"});
+            return
+          }
+          else
+          {
+            let userRef = this.database.ref('Resercher/' + snap.key)
+            userRef.update({'Status': "Unpaid"});
+            return
+          }
         }
       })
       // console.log(data.key)
     })
     alert("You are submitting " + this.state.datalist[event.target.id].Name);
   }
-  // const columns= [
-  //   {
-  //     label: 'Order No',
-  //     field: 'order',
-  //     sort: 'asc'
-  //   },
-  //   {
-  //     label: 'Name',
-  //     field: 'name',
-  //     sort: 'asc'
-  //   },
-  //   {
-  //     label: 'Verify By',
-  //     field: 'by',
-  //     sort: 'asc'
-  //   },
-  //   {
-  //     label: 'Date',
-  //     field: 'date',
-  //     sort: 'asc'
-  //   },
-  //   {
-  //     label: 'Status Payment',
-  //     field: 'status',
-  //     sort: 'asc'
-  //   }
-
-  // ];
-
-  // const rows_rounded_btn = [
-  //   {
-  //     'order': 1,
-  //     'name': 'Name Researcher1',
-  //     'by': 'NameFinance',
-  //     'date': 'August 20,2020 10.30am',
-  //     'status': <MDBBtn color="success" rounded size="sm">Pass</MDBBtn>
-  //   },
-  //   {
-  //     'order': 2,
-  //     'name': 'Jacob',
-  //     'by': 'NameFinance',
-  //     'date': 'August',
-  //     'status': <MDBBtn color="success" rounded size="sm">Pass</MDBBtn>
-  //   },
-  //   {
-  //     'order': 3,
-  //     'name': 'Larry',
-  //     'by': 'NameFinance',
-  //     'date': 'August',
-  //     'status': <MDBBtn color="success" rounded size="sm">Pass</MDBBtn>
-  //   }
-  // ];
   
   render(){
     return (
@@ -121,7 +90,7 @@ class Checkpayment extends React.Component {
                         <td>{data.Price}</td>
                         {/* <td>{data.Status}</td> */}
                         <td>{data.Date}</td>
-                        <td><input style={{}} className="w3-input-transparent" type="submit" id={index} value={data.Status} onClick={this.mySubmitHandler}/></td>
+                        <td><input style={{}} className="w3-input-transparent" type="submit" id={index} value={Btn(data.Status)}onClick={this.mySubmitHandler} /></td>
 
                       </tr> 
                   );

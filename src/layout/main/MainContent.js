@@ -11,7 +11,7 @@ import Reset from './Reset'
 import Signout from './Signout'
 import Data from './Data'
 import reactLogo from '../../images/head.png'
-import Login from './Login'
+import login from './login'
 
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import SideBarMenu from '../sidebar/SideBarMenu';
@@ -35,7 +35,7 @@ function MainContent() {
           <Route path='/Edit' exact component={Edit } />
           <Route path='/Reset' exact component={Reset } />
           <Route path='/Signout' exact component={Signout } />
-          <Route path='/Login' exact component={Login } />
+          <Route path='/login' exact component={login } />
         </Switch>
       </Router>
         </main>

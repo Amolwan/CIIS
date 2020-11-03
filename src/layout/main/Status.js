@@ -2,6 +2,7 @@ import React from 'react';
 import { MDBBtn, MDBTable, MDBTableBody, MDBTableHead  } from 'mdbreact';
 // import firebase from 'firebase';
 import firebase from '../../firebase/firebaseIndex';
+import { auth } from 'firebase';
 
 class Status extends React.Component {
   constructor(props) {
@@ -15,7 +16,7 @@ class Status extends React.Component {
     firebase.database().ref('Resercher/').on("value",snapshot => {
       let Resercherlist = [];
       snapshot.forEach(snap => {
-        if(snap.val().Status == "Unpair")
+        if(snap.val().Status == "Unpaid")
         {
           Resercherlist.push(snap.val());
         }
@@ -35,7 +36,7 @@ class Status extends React.Component {
         if(snap.val().note_id == this.state.datalist[event.target.id].note_id)
         {
             let userRef = this.database.ref('Resercher/' + snap.key)
-            userRef.update({'Status': "Pay"});
+            userRef.update({'Status': "Paid"});
         }
       })
       // console.log(data.key)
@@ -66,8 +67,8 @@ class Status extends React.Component {
                         {/* {console.log(data)} */}
                         <td>{data.Name}</td>
                         <td>{data.Name}</td>
-                        <td>{data.Price}</td>
-                        {/* <td>{data.Status}</td> */}
+                        {/* {<td>{firebase.auth().currentUser.uid}</td>} */}
+                        <td>{data.Status}</td>
                         <td>{data.Date}</td>
                         <td><input style={{}} className="w3-input-transparent" type="submit" id={index} value={data.Status} onClick={this.mySubmitHandler}/></td>
 

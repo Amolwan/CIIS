@@ -5,9 +5,9 @@ import '../../styles/login.css';
 import user from '../../images/user.png'
 import './Status'
 import './MainContent'
-import { signin } from '../../helpers/auth';
+// import { signin } from '../../helpers/auth';
 
-export default class Login extends Component {
+export default class login extends Component {
 
     constructor() {
       super();
@@ -28,12 +28,12 @@ export default class Login extends Component {
   
     async handleSubmit(event) {
       event.preventDefault();
-      this.setState({ error: '' });
-      try {
-        await signin(this.state.email, this.state.password);
-      } catch (error) {
-        this.setState({ error: error.message });
-      }
+      // this.setState({ error: '' });
+      // try {
+      //   await signin(this.state.email, this.state.password);
+      // } catch (error) {
+      //   this.setState({ error: error.message });
+      // }
     }
   
     render() {
