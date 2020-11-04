@@ -5,6 +5,7 @@ import { auth } from '../../services/firebase';
 import firebase from 'firebase';
 import csv from 'csv';
 import Dropzone from 'react-dropzone';
+import Unpaid from './Allresearch';
 
 var userList = [];
 class importCSV extends React.Component {
@@ -23,9 +24,12 @@ class importCSV extends React.Component {
       for (var i = 1; i < data.length; i++) {
         const paper_id = data[i][0];
         const paper_name = data[i][1];
-        const user = data[i][2];
-        const email = data[i][3];
-        const type = data[i][4];
+        const type = data[i][2];
+        const f_name = data[i][3];
+        const l_name = data[i][4];
+        const card_id = data[i][5];
+        const nation = data[i][6];
+        const email = data[i][7];
         var be_price = "0";
         var af_price = "0";
 
@@ -49,15 +53,23 @@ class importCSV extends React.Component {
         const newUser = { 
             "paper_id": paper_id, 
             "paper_name": paper_name,
-            "user":user,"email":email,
             "type":type ,
+            "f_name":f_name,
+            "l_name":l_name,
+            "card_id":card_id ,
+            "nation":nation,
+            "email":email,
             "be_price":be_price ,
-            "af_price":af_price
+            "af_price":af_price ,
+            "Status" : "Unpaid",
+            "Date" : new Date().toLocaleString('en-US', {
+              timeZone: 'Asia/Bangkok'})
+            
         };
         userList.push(newUser);
         console.log(userList)
 
-        fetch('https://loginse-5c3bd.firebaseio.com/usersCSV.json', {
+        fetch('https://loginse-5c3bd.firebaseio.com/usersCCSV.json', {
           method: 'POST',
           headers: {
             'Accept': 'application/json',

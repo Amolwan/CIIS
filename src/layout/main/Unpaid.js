@@ -17,7 +17,7 @@ class Unpaid extends React.Component {
   }
   componentDidMount(){
    
-    firebase.database().ref('Resercher/').on("value",snapshot => {
+    firebase.database().ref('usersCCSV/').on("value",snapshot => {
       let Resercherlist = [];
       snapshot.forEach(snap => {
         if(snap.val().Status == "Unpaid")
@@ -35,11 +35,11 @@ class Unpaid extends React.Component {
     event.preventDefault();
     console.log([event.target.id])
     console.log(this.state.datalist[event.target.id].note_id)
-    firebase.database().ref('Resercher/').on("value",snapshot => {
+    firebase.database().ref('usersCCSV/').on("value",snapshot => {
       snapshot.forEach(snap => {
         if(snap.val().note_id == this.state.datalist[event.target.id].note_id)
         {
-            let userRef = this.database.ref('Resercher/' + snap.key)
+            let userRef = this.database.ref('usersCCSV/' + snap.key)
             userRef.update({'Status': "Paid"});
         }
       })
@@ -71,11 +71,11 @@ class Unpaid extends React.Component {
                       <tr> 
                         
                         {/* {console.log(data)} */}
-                        <td>{data.Name}</td>
-                        <td>{data.Name}</td>
+                        <td>{data.paper_id}</td>
+                        <td>{data.f_name}</td>
                         {/* {<td>{firebase.auth().currentUser.uid}</td>} */}
-                        <td>{data.Status}</td>
-                        <td>{data.Price}</td>
+                        <td>{data.paper_name}</td>
+                        <td>{data.be_price}</td>
                         {/* <td><input style={{}} className="w3-input-transparent" type="submit" id={index} value={data.Status} onClick={this.mySubmitHandler}/></td> */}
 
                       </tr> 

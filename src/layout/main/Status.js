@@ -18,7 +18,7 @@ class Status extends React.Component {
   }
   componentDidMount(){
    
-    firebase.database().ref('Resercher/').on("value",snapshot => {
+    firebase.database().ref('usersCCSV/').on("value",snapshot => {
       let Resercherlist = [];
       snapshot.forEach(snap => {
         if(snap.val().Status == "Paid" && snap.val().Status_AD == "0" )
@@ -39,11 +39,11 @@ class Status extends React.Component {
     event.preventDefault();
     console.log([event.target.id])
     console.log(this.state.datalist[event.target.id].note_id)
-    firebase.database().ref('Resercher/').on("value",snapshot => {
+    firebase.database().ref('usersCCSV/').on("value",snapshot => {
       snapshot.forEach(snap => {
-        if(snap.val().note_id == this.state.datalist[event.target.id].note_id)
+        if(snap.val().paper_name == this.state.datalist[event.target.id].paper_name)
         {
-            let userRef = this.database.ref('Resercher/' + snap.key)
+            let userRef = this.database.ref('usersCCSV/' + snap.key)
             userRef.update({'Status': "Paid"});
             userRef.update({'Status_AD' : "1"});
            
@@ -52,7 +52,7 @@ class Status extends React.Component {
       })
       // console.log(data.key)
     })
-    alert("You are submitting " + this.state.datalist[event.target.id].Name);
+    alert("You are submitting " + this.state.datalist[event.target.id].f_name);
   }
   
   render(){
@@ -79,8 +79,8 @@ class Status extends React.Component {
                       <tr> 
                         
                         {/* {console.log(data)} */}
-                        <td>{data.ID_Card}</td>
-                        <td>{data.Name}</td>
+                        <td>{data.paper_id}</td>
+                        <td>{data.f_name}</td>
                         {/* {<td>{firebase.auth().currentUser.uid}</td>} */}
                         <td>{data.Status}</td>
                         <td>{data.Date}</td>
