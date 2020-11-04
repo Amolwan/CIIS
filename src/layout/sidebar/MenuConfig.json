@@ -72,12 +72,16 @@
       "submenus": [
         {
           "title": "Add Admin",
-          "href": "/Edit"
+          "href": "/Add"
           
         },
         {
-          "title": "Reset",
+          "title": "ResetPassword",
           "href": "/Paypal"
+        }
+        ,{
+          "title": "ImportCSV",
+          "href": "/ImportCSV"
         }
       ]
       },

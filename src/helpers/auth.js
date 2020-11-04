@@ -7,3 +7,7 @@ export function signin(email, password) {
 export function logout() {
     return auth().signOut()
   }
+
+  export function signup(email, password, dob, address) {
+    return auth().createUserWithEmailAndPassword(email, password);
+  }

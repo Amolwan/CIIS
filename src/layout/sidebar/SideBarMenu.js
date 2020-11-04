@@ -10,7 +10,6 @@ import userImage from '../../images/user.jpg';
 // import { ReactComponent } from '*.svg';
 import {CheckStatus} from '../main/MainContent'
 import { auth,db } from '../../services/firebase';
-import firebase from 'firebase'
 
 let renderCustomHorizontalThumb = ({ style, ...props }) => {
                         
@@ -25,17 +24,7 @@ let renderCustomHorizontalThumb = ({ style, ...props }) => {
             {...props}/>
     );
 }
-function call()
-{
-    let AdminStatus = CheckStatus();
-    if (AdminStatus){
-        return auth().currentUser.uid
-    }
-    else
-    {
-        return "BBBB"
-    }
-}
+
 
 function SideBarMenu() {
 
@@ -106,7 +95,7 @@ function SideBarMenu() {
                             <img className="img-responsive img-rounded" src={userImage} alt="User " />
                         </div>
                         <div className="user-info">
-                            <span className="user-name">{call()}
+                            <span className="user-name">
                                 <strong> Smith</strong>
                             </span>
                             <span className="user-role"> Administrator</span>

@@ -16,6 +16,8 @@ import Edit from './Edit'
 import Home from './Home'
 import Status from './Status';
 import Signout from './Signout';
+import Add from './Add';
+import importCSV from './importCSV';
 import { auth,db } from '../../services/firebase';
 
 function PrivateRoute({ component: Component, authenticated, ...rest }) {
@@ -28,6 +30,8 @@ function PrivateRoute({ component: Component, authenticated, ...rest }) {
     />
   )
 }
+
+
 export async function CheckStatus(){
   return new Promise((resolve,reject)=>{
       let uid = auth().currentUser.uid;
@@ -65,7 +69,6 @@ class MainContent extends Component {
     this.state = {
       authenticated: false,
       loading: true,
-    
     };
   }
 
@@ -103,6 +106,8 @@ class MainContent extends Component {
           <PrivateRoute path="/Edit" authenticated={this.state.authenticated} component={Edit}></PrivateRoute>
           <PublicRoute path="/login" authenticated={this.state.authenticated} component={Login}></PublicRoute>
           <PrivateRoute path="/Signout" authenticated={this.state.authenticated} component={Signout}></PrivateRoute>
+          <PrivateRoute path="/Add" authenticated={this.state.authenticated} component={Add}></PrivateRoute>
+          <PrivateRoute path="/importCSV" authenticated={this.state.authenticated} component={importCSV}></PrivateRoute>
           <PublicRoute path="/Home" authenticated={this.state.authenticated} component={Home}></PublicRoute>        </Switch>
 
       </Router>
