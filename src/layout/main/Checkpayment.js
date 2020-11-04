@@ -49,12 +49,15 @@ class Checkpayment extends React.Component {
           {
             let userRef = this.database.ref('Resercher/' + snap.key)
             userRef.update({'Status': "Paid"});
+            userRef.update({'Status_AD': "0"});
+
             return
           }
           else
           {
             let userRef = this.database.ref('Resercher/' + snap.key)
             userRef.update({'Status': "Unpaid"});
+            userRef.update({'Status_AD': "0"});
             return
           }
         }

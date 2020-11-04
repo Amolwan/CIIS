@@ -16,10 +16,11 @@ class Status extends React.Component {
     firebase.database().ref('Resercher/').on("value",snapshot => {
       let Resercherlist = [];
       snapshot.forEach(snap => {
-        if(snap.val().Status == "Unpaid")
+        if(snap.val().Status == "Paid" && snap.val().Status_AD == "0" )
         {
-          
+
           Resercherlist.push(snap.val());
+    
         
         }
         // {console.log(snap.key)}
@@ -39,8 +40,10 @@ class Status extends React.Component {
         {
             let userRef = this.database.ref('Resercher/' + snap.key)
             userRef.update({'Status': "Paid"});
-            userRef.update({'Status_Ad' : "Paid"});
+            userRef.update({'Status_AD' : "1"});
+           
         }
+
       })
       // console.log(data.key)
     })
@@ -68,12 +71,12 @@ class Status extends React.Component {
                       <tr> 
                         
                         {/* {console.log(data)} */}
-                        <td>{data.Name}</td>
+                        <td>{data.ID_Card}</td>
                         <td>{data.Name}</td>
                         {/* {<td>{firebase.auth().currentUser.uid}</td>} */}
                         <td>{data.Status}</td>
                         <td>{data.Date}</td>
-                        <td><input style={{}} className="w3-input-transparent" type="submit" id={index} value={data.Status} onClick={this.mySubmitHandler}/></td>
+                        <td><input style={{}} className="w3-input-transparent" type="submit" id={index} value={'Pass'} onClick={this.mySubmitHandler}/></td>
 
                       </tr> 
                   );
