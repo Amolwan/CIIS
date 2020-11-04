@@ -1,8 +1,14 @@
 import React from 'react';
 import { MDBBtn, MDBTable, MDBTableBody, MDBTableHead  } from 'mdbreact';
 // import firebase from 'firebase';
-import firebase from '../../firebase/firebaseIndex';
+// import firebase from '../../firebase/firebaseIndex';
+import firebase from 'firebase';
+import { auth } from '../../helpers/auth';
 import { ButtonBase } from '@material-ui/core';
+import reactLogo from '../../images/head.png'
+import SideBarMenu from '../sidebar/SideBarMenu';
+
+
 function Btn(data){
   if(data == "Unpaid")
   {
@@ -69,6 +75,9 @@ class Checkpayment extends React.Component {
   
   render(){
     return (
+      <div  class="page-content">
+      <SideBarMenu/>
+     <img src={reactLogo} alt="React logo" width="100%" />
       <div className="MainDiv">
         <div className="container">
             <table id="example" class="display table">
@@ -104,6 +113,7 @@ class Checkpayment extends React.Component {
               </tbody>
            </table>
        </div>
+      </div>
       </div>
     );
   }

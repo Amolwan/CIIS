@@ -1,8 +1,12 @@
 import React from 'react';
 import { MDBBtn, MDBTable, MDBTableBody, MDBTableHead  } from 'mdbreact';
 // import firebase from 'firebase';
-import firebase from '../../firebase/firebaseIndex';
-import { auth } from 'firebase';
+// import firebase from '../../firebase/firebaseIndex';
+// import { auth } from 'firebase';
+import firebase from 'firebase';
+import { auth } from '../../helpers/auth';
+import reactLogo from '../../images/head.png';
+import SideBarMenu from '../sidebar/SideBarMenu';
 
 class Unpaid extends React.Component {
   constructor(props) {
@@ -46,6 +50,9 @@ class Unpaid extends React.Component {
   
   render(){
     return (
+      <div  class="page-content">
+      <SideBarMenu/>
+     <img src={reactLogo} alt="React logo" width="100%" />
       <div className="MainDiv">
         <div className="container">
             <table id="example" class="display table">
@@ -80,6 +87,7 @@ class Unpaid extends React.Component {
               </tbody>
            </table>
        </div>
+      </div>
       </div>
     );
   }

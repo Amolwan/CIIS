@@ -57,13 +57,7 @@
         "type":  "simple",
         "href": "/Unpaid"
       },
-      {
-        "title": "Data",
-        "icon": "fa fa-users",
-        "active": false,
-        "type":  "simple",
-        "href":"/data"
-      },
+      
       {
         "title": "setting",
         "type": "header"

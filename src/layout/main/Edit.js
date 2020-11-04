@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 // import { Form } from 'semantic-ui-react'
-import '../../styles/register.css';
+import '../../styles/Edit.css';
 import reactLogo from '../../images/head.png'
 import SideBarMenu from '../sidebar/SideBarMenu';
 
