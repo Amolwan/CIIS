@@ -1,6 +1,5 @@
-import firebase, { auth } from 'firebase';
-
-const firebaseConfig = {
+import firebase from "firebase";
+const config = {
   apiKey: "AIzaSyDckgWOsIXhWuKP3ywqHKpCSPZj9PtVu_s",
   authDomain: "loginse-5c3bd.firebaseapp.com",
   databaseURL: "https://loginse-5c3bd.firebaseio.com",
@@ -11,12 +10,7 @@ const firebaseConfig = {
   measurementId: "G-X9HR5E03ZZ"
 };
 
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);
-export default firebase;
+firebase.initializeApp(config);
 
-// firebase.initializeApp(firebaseConfig);
-// firebase.analytics();
-// export const auth = firebase.auth;
-// export const db = firebase.database();
-
+export const auth = firebase.auth;
+export const db = firebase.database();

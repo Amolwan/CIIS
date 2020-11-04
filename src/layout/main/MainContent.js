@@ -1,5 +1,11 @@
-import React from 'react';
-import Status from './Status'
+import {
+  Route,
+  BrowserRouter as Router,
+  Switch,
+  Redirect,
+} from "react-router-dom";
+import Login from './login';
+import React, { Component } from 'react';
 import Checkpayment from './Checkpayment'
 import Allresearch from './Allresearch'
 import Total from './Total'
@@ -7,42 +13,106 @@ import Paypal from './Paypal'
 import TMB from './TMB'
 import Unpaid from './Unpaid'
 import Edit from './Edit'
-import Reset from './Reset'
-import Signout from './Signout'
-import Data from './Data'
-import reactLogo from '../../images/head.png'
-import login from './login'
-import re from './regis'
+import Home from './Home'
+import Status from './Status';
+import Signout from './Signout';
+import Add from './Add';
+import importCSV from './importCSV';
+import { auth,db } from '../../services/firebase';
 
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import SideBarMenu from '../sidebar/SideBarMenu';
+function PrivateRoute({ component: Component, authenticated, ...rest }) {
+  return (
+    <Route
+      {...rest}
+      render={(props) => authenticated === true
+        ? <Component {...props} />
+        : <Redirect to={{ pathname: '/login', state: { from: props.location } }} />}
+    />
+  )
+}
 
-function MainContent() {
 
-    return (
-        <main class="page-content">
-          <SideBarMenu/>
-          <img src={reactLogo} alt="React logo" width="100%" />
-            <Router>
+export async function CheckStatus(){
+  return new Promise((resolve,reject)=>{
+      let uid = auth().currentUser.uid;
+      let bool = false;
+      var ref =  db.ref("Admin/");
+      ref.once("value").then(async function(snapshot) {
+        await snapshot.forEach( function(snap) {
+        
+          if(uid === snap.key)
+          {
+            bool =  true;
+            console.log(uid);
+            console.log(snap.key)
+            resolve(bool);
+          }
+      })
+    });
+    reject(bool);
+  })
+}
+function PublicRoute({ component: Component, authenticated, ...rest }) {
+  return (
+    <Route
+      {...rest}
+      render={(props) => authenticated === false
+        ? <Component {...props} />
+        : <Redirect to='/Status' />}
+    />
+  )
+}
+class MainContent extends Component {
+
+  constructor() {
+    super();
+    this.state = {
+      authenticated: false,
+      loading: true,
+    };
+  }
+
+
+  componentDidMount() {
+    auth().onAuthStateChanged((user) => {
+      if (user) {
+        this.setState({
+          authenticated: true,
+          loading: false,
+      
+        })
+      } else {
+        this.setState({
+          authenticated: false,
+          loading: false,
+        });
+      }
+    })
+  }
+ 
+  render() {
+    return this.state.loading === true ? <h2>Loading...</h2> : (
+
+        <Router>
         <Switch>
-          <Route path='/Status' component={Status} />
-          <Route path='/Checkpayment' exact component={Checkpayment } />
-          <Route path='/Allresearch' component={Allresearch} />
-          <Route path='/Total' component={Total} />
-          <Route path='/Paypal' component={Paypal} />
-          <Route path='/TMB' component={TMB} />
-          <Route path='/Unpaid' exact component={Unpaid } />
-          <Route path='/Data' component={Data} />
-          <Route path='/Edit' exact component={re } />
-          <Route path='/Reset' exact component={Reset } />
-          <Route path='/Signout' exact component={Signout } />
-          <Route path='/login' exact component={login } />
-        </Switch>
-      </Router>
-        </main>
+          <Route exact path="/" component={Home}></Route>
+          <PrivateRoute path="/Status" authenticated={this.state.authenticated} component={Status}></PrivateRoute>
+          <PrivateRoute path="/Checkpayment" authenticated={this.state.authenticated} component={Checkpayment}></PrivateRoute>
+          <PrivateRoute path="/Allresearch" authenticated={this.state.authenticated} component={Allresearch}></PrivateRoute>
+          <PrivateRoute path="/Total" authenticated={this.state.authenticated} component={Total}></PrivateRoute>
+          <PrivateRoute path="/Paypal" authenticated={this.state.authenticated} component={Paypal}></PrivateRoute>
+          <PrivateRoute path="/TMB" authenticated={this.state.authenticated} component={TMB}></PrivateRoute>
+          <PrivateRoute path="/Unpaid" authenticated={this.state.authenticated} component={Unpaid}></PrivateRoute>
+          <PrivateRoute path="/Edit" authenticated={this.state.authenticated} component={Edit}></PrivateRoute>
+          <PublicRoute path="/login" authenticated={this.state.authenticated} component={Login}></PublicRoute>
+          <PrivateRoute path="/Signout" authenticated={this.state.authenticated} component={Signout}></PrivateRoute>
+          <PrivateRoute path="/Add" authenticated={this.state.authenticated} component={Add}></PrivateRoute>
+          <PrivateRoute path="/importCSV" authenticated={this.state.authenticated} component={importCSV}></PrivateRoute>
+          <PublicRoute path="/Home" authenticated={this.state.authenticated} component={Home}></PublicRoute>        </Switch>
 
-    )
+      </Router>
+    );
+  }
 }
 
 export default MainContent;
-

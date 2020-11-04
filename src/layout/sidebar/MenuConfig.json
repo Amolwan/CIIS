@@ -77,15 +77,18 @@
         "type": "dropdown",
       "submenus": [
         {
-          "title": "Add admin",
-          "href": "/Edit"
+          "title": "Add Admin",
+          "href": "/Add"
           
         },
         {
-          "title": "Reset",
-          "href": "/Reset"
+          "title": "ResetPassword",
+          "href": "/Paypal"
         }
-        
+        ,{
+          "title": "ImportCSV",
+          "href": "/ImportCSV"
+        }
       ]
       },
   
