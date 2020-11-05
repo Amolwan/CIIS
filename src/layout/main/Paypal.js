@@ -83,7 +83,7 @@ class Paypal extends React.Component {
                         <td>{data.paper_id}</td>
                         <td>{data.paper_name}</td>
                         {/* {<td>{firebase.auth().currentUser.uid}</td>} */}
-                        <td>{data.f_name}</td>
+                        <td>{data.f_name +" "+ data.l_name}</td>
                         <td>{data.be_price}</td>
                         <td>{data.bank}</td>
                         {/* <td><input style={{}} className="w3-input-transparent" type="submit" id={index} value={data.Status} onClick={this.mySubmitHandler}/></td> */}

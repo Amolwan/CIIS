@@ -80,7 +80,7 @@ class Status extends React.Component {
                         
                         {/* {console.log(data)} */}
                         <td>{data.paper_id}</td>
-                        <td>{data.f_name}</td>
+                        <td>{data.f_name +" "+ data.l_name}</td>
                         {/* {<td>{firebase.auth().currentUser.uid}</td>} */}
                         <td>{data.Status}</td>
                         <td>{data.Date}</td>

@@ -98,7 +98,7 @@ class Checkpayment extends React.Component {
                         
                         {/* {console.log(data)} */}
                         <td>{data.paper_id}</td>
-                        <td>{data.f_name}</td>
+                        <td>{data.f_name +" "+ data.l_name}</td>
                         <td>{data.be_price}</td>
                         {/* <td>{data.Status}</td> */}
                         <td>{data.Date}</td>
