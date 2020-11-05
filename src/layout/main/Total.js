@@ -9,7 +9,7 @@ import SideBarMenu from '../sidebar/SideBarMenu';
 class Total extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {datalist : []};
+    this.state = {datalist : [],money:0};
     this.database = firebase.database();
     this.mySubmitHandler = this.mySubmitHandler.bind(this);
   }
@@ -20,6 +20,7 @@ class Total extends React.Component {
       snapshot.forEach(snap => {
         if(snap.val().Status == "Paid")
         {
+          this.setState({money:this.state.money+Number(snap.val().be_price)})
           Resercherlist.push(snap.val());
         }
         // {console.log(snap.key)}
@@ -58,11 +59,13 @@ class Total extends React.Component {
 
   render(){
     return (
+      
       <div  class="page-content">
       <SideBarMenu/>
      <img src={reactLogo} alt="React logo" width="100%" />
       <div className="MainDiv">
         <div className="container">
+          
             <table id="example" class="display table">
               <thead class="thead-dark">
                   <tr>
@@ -74,11 +77,14 @@ class Total extends React.Component {
                   </tr>
               </thead>
               <tbody>  
+                
               {this.state.datalist.map((data,index) => {
-                // {console.log(index)}
+              
+             
+              console.log(this.state.money)
+              
                   return (
                       <tr> 
-                        
                         {/* {console.log(data)} */}
                         <td>{data.paper_id}</td>
                         <td>{data.paper_name}</td>
@@ -87,13 +93,19 @@ class Total extends React.Component {
                         <td>{data.be_price}</td>
                         <td>{data.bank}</td>
                         {/* <td><input style={{}} className="w3-input-transparent" type="submit" id={index} value={data.Status} onClick={this.mySubmitHandler}/></td> */}
-
+                        
                       </tr> 
                   );
                   
                   })}
               
-              
+              <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>{this.state.money}</td>
+                </tr>
               </tbody>
            </table>
        </div>
