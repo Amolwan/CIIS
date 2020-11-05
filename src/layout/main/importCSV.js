@@ -39,7 +39,7 @@ class importCSV extends React.Component {
         if(type_n === 'Regular Full'){
             type = "1";  
             be_price = "10000";
-            af_price = "12000";
+            af_price = "120000";
         }
         else if (type_n === 'Regular Short'){
             type = "3";  
