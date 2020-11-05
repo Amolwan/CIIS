@@ -1,45 +1,37 @@
 import React, { Component } from "react";
 // import { Form } from 'semantic-ui-react'
 import '../../styles/Reset.css';
+import firebase from 'firebase'
+import reactLogo from '../../images/head.png';
+import SideBarMenu from '../sidebar/SideBarMenu';
+import { auth } from '../../services/firebase';
 
 
+const reset = (props) => {
+  
 
-export default class Reset extends Component {
+  const handleResetPassword = (email) =>{
+    console.log(auth().currentUser.email)
+    
+    firebase.auth().sendPasswordResetEmail(firebase.auth().currentUser.email)
+    .then(function (user) {
+      alert('Please check your email...')
+    }).catch(function (e) {
+      console.log(e)
+    })
+  }
 
-    render() {
+
+    
         return (
-            <form>
-                <div className="auth-wrapper">
-                    <div className="auth-inner">
-                      <div>
-                        <h1>Reset Password</h1>
-                        <div className="under-register">
-                          <p>Register on the platform </p>
-                        </div>
-                      </div>
-
-                      <div class="form-row">
-                        
-                        <div class="form-group col-md-6">
-                        <label for="inputpassword">Create Password *</label>
-                        <input type="password" class="form-control" id="inputpassword" placeholder="ex.amolwan1234....."/>
-                        </div>
-                      </div>
-
-                      
-                      <div align="right"> 
-                        <button type="submit" class="btn btn-secondary ">SUBMIT</button>
-                      </div> 
-
-                      {/* <p className="have-account">
-                        You have an account? <a href="#">Sign In</a>
-                      </p> */}
-
-                      
-     
-                    </div>
-                </div>
-            </form>
+          <div  class="page-content">
+          <SideBarMenu/>
+         <img src={reactLogo} alt="React logo" width="100%" />
+          
+          <button onClick={handleResetPassword}>reset </button>
+          </div>
+            
         );
-    }
+    
 }
+export default reset;

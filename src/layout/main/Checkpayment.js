@@ -56,6 +56,7 @@ class Checkpayment extends React.Component {
             let userRef = this.database.ref('usersCCSV/' + snap.key)
             userRef.update({'Status': "Paid"});
             userRef.update({'Status_AD': "0"});
+            userRef.update({'admin' : firebase.auth().currentUser.email})
 
             return
           }
@@ -101,6 +102,7 @@ class Checkpayment extends React.Component {
                         <td>{data.f_name +" "+ data.l_name}</td>
                         <td>{data.be_price}</td>
                         {/* <td>{data.Status}</td> */}
+                        
                         <td>{data.Date}</td>
                         <td><input style={{}} className="w3-input-transparent" type="submit" id={index} value={Btn(data.Status)}onClick={this.mySubmitHandler} /></td>
 

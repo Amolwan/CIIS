@@ -1,3 +1,4 @@
+
 import React from 'react';
 import reactLogo from '../../images/head.png';
 import SideBarMenu from '../sidebar/SideBarMenu';
@@ -24,7 +25,7 @@ class importCSV extends React.Component {
       for (var i = 1; i < data.length; i++) {
         const paper_id = data[i][0];
         const paper_name = data[i][1];
-        const type = data[i][2];
+        const type_n = data[i][2];
         const f_name = data[i][3];
         const l_name = data[i][4];
         const card_id = data[i][5];
@@ -32,21 +33,26 @@ class importCSV extends React.Component {
         const email = data[i][7];
         var be_price = "0";
         var af_price = "0";
+        var type = "0";
         var bank = "";
 
-        if(type === 'Regular Full'){
+        if(type_n === 'Regular Full'){
+            type = "1";  
             be_price = "10000";
             af_price = "120000";
         }
-        else if (type === 'Regular Short'){
+        else if (type_n === 'Regular Short'){
+            type = "3";  
             be_price = "5000";
             af_price = "7000";
         }
-        else if (type === 'Virtual Full'){
+        else if (type_n === 'Virtual Full'){
+            type = "2";
             be_price = "6000";
             af_price = "8000";   
         }
-        else if (type === 'Virtual Short'){
+        else if (type_n === 'Virtual Short'){
+            type = "4";
             be_price = "3000";
             af_price = "5000";   
         }
@@ -70,7 +76,8 @@ class importCSV extends React.Component {
             "Status" : "Unpaid",
             "Date" : new Date().toLocaleString('en-US', {
               timeZone: 'Asia/Bangkok'}),
-            "bank" :bank
+            "bank" :bank,
+            "type_n":type_n
             
         };
         userList.push(newUser);
@@ -117,4 +124,4 @@ class importCSV extends React.Component {
   
 };
 
-export default importCSV;
+export default importCSV

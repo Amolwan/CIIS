@@ -18,6 +18,7 @@ import Status from './Status';
 import Signout from './Signout';
 import Add from './Add';
 import importCSV from './importCSV';
+import Reset from './Reset'
 import { auth,db } from '../../services/firebase';
 
 function PrivateRoute({ component: Component, authenticated, ...rest }) {
@@ -108,6 +109,7 @@ class MainContent extends Component {
           <PrivateRoute path="/Signout" authenticated={this.state.authenticated} component={Signout}></PrivateRoute>
           <PrivateRoute path="/Add" authenticated={this.state.authenticated} component={Add}></PrivateRoute>
           <PrivateRoute path="/importCSV" authenticated={this.state.authenticated} component={importCSV}></PrivateRoute>
+          <PrivateRoute path="/Reset" authenticated={this.state.authenticated} component={Reset}></PrivateRoute>
           <PublicRoute path="/Home" authenticated={this.state.authenticated} component={Home}></PublicRoute>        </Switch>
 
       </Router>
