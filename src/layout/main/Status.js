@@ -82,7 +82,7 @@ class Status extends React.Component {
                         <td>{data.paper_id}</td>
                         <td>{data.f_name +" "+ data.l_name}</td>
                         {/* {<td>{firebase.auth().currentUser.uid}</td>} */}
-                        <td>{data.Status}</td>
+                        <td>{data.admin}</td>
                         <td>{data.Date}</td>
                         <td><input style={{}} className="w3-input-transparent" type="submit" id={index} value={'Pass'} onClick={this.mySubmitHandler}/></td>
 
