@@ -29,7 +29,7 @@ class Checkpayment extends React.Component {
   }
   componentDidMount(){
    
-    firebase.database().ref('Resercher/').on("value",snapshot => {
+    firebase.database().ref('usersCCSV/').on("value",snapshot => {
       let Resercherlist = [];
       snapshot.forEach(snap => {
         if(snap.val().Status == "Unpaid" || snap.val().Status == "Paid")
@@ -47,13 +47,13 @@ class Checkpayment extends React.Component {
     event.preventDefault();
     console.log([event.target.id])
     console.log(this.state.datalist[event.target.id].note_id)
-    firebase.database().ref('Resercher/').once("value",snapshot => {
+    firebase.database().ref('usersCCSV/').once("value",snapshot => {
       snapshot.forEach(snap => {
-        if(snap.val().note_id == this.state.datalist[event.target.id].note_id)
+        if(snap.val().paper_name == this.state.datalist[event.target.id].paper_name)
         {
           if(snap.val().Status == "Unpaid")
           {
-            let userRef = this.database.ref('Resercher/' + snap.key)
+            let userRef = this.database.ref('usersCCSV/' + snap.key)
             userRef.update({'Status': "Paid"});
             userRef.update({'Status_AD': "0"});
 
@@ -61,7 +61,7 @@ class Checkpayment extends React.Component {
           }
           else
           {
-            let userRef = this.database.ref('Resercher/' + snap.key)
+            let userRef = this.database.ref('usersCCSV/' + snap.key)
             userRef.update({'Status': "Unpaid"});
             userRef.update({'Status_AD': "0"});
             return
@@ -70,7 +70,7 @@ class Checkpayment extends React.Component {
       })
       // console.log(data.key)
     })
-    alert("You are submitting " + this.state.datalist[event.target.id].Name);
+    alert("You are submitting " + this.state.datalist[event.target.id].f_name);
   }
   
   render(){
@@ -97,9 +97,9 @@ class Checkpayment extends React.Component {
                       <tr> 
                         
                         {/* {console.log(data)} */}
-                        <td>{data.Name}</td>
-                        <td>{data.Name}</td>
-                        <td>{data.Price}</td>
+                        <td>{data.paper_id}</td>
+                        <td>{data.f_name +" "+ data.l_name}</td>
+                        <td>{data.be_price}</td>
                         {/* <td>{data.Status}</td> */}
                         <td>{data.Date}</td>
                         <td><input style={{}} className="w3-input-transparent" type="submit" id={index} value={Btn(data.Status)}onClick={this.mySubmitHandler} /></td>

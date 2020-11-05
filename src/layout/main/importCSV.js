@@ -9,65 +9,7 @@ import Dropzone from 'react-dropzone';
 var userList = [];
 
 class importCSV extends React.Component {
-  // constructor() {
-  //   super();
-  //   this.state = {
-  //     paper_id: "",
-  //     paper_name: "",
-  //     user: "",
-  //     email: "",
-  //     type_n: "",
-  //     be_price: "",
-  //     af_price: "",
-  //     type: "",
-  //     uid: ""
-  //   };
-  // }
-  // handleChange(evt) {
-  //   this.setState({ [evt.target.name]: evt.target.value });
-  // }
-  // handleSubmit(event) {
-  //   var user = firebase.auth().currentUser;
-  //   try {
-  //       if (1) {
-
-  //         firebase
-  //           .auth()
-  //           .createUserWithEmailAndPassword(
-  //             this.state.email,
-  //             this.state.password
-  //           )
-  //           .then(async (user) => {
-  //             console.log(user.user.uid);
-  //             await this.setState({
-  //               uid: user.user.uid,
-  //             });
-  //           })
-  //           .then(() => {
-  //             console.log(this.state.uid);
-  //             firebase
-  //               .database()
-  //               .ref("User")
-  //               .child(this.state.uid)
-  //               .set({
-  //                 name: this.state.name,
-  //                 email: this.state.email,
-  //                 is_admin: "",
-
-  //               });
-  //             alert("สำเร็จ !");
-  //           })
-  //           .catch((error) => {
-  //             // Handle Errors here.
-  //             alert(error);
-  //           });
-  //       }
-  //   } catch (err) {
-  //     alert(err);
-  //   }
-  //   event.preventDefault();
-  // }
-
+  
 
   onDrop = (files) => {
     this.setState({ files });
