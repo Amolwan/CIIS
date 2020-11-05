@@ -77,7 +77,7 @@
         },
         {
           "title": "ResetPassword",
-          "href": "/Paypal"
+          "href": "/Reset"
         }
         ,{
           "title": "ImportCSV",
