@@ -32,7 +32,7 @@ class importCSV extends React.Component {
         const email = data[i][7];
         var be_price = "0";
         var af_price = "0";
-
+        var bank = "";
 
         if(type === 'Regular Full'){
             be_price = "10000";
@@ -50,6 +50,12 @@ class importCSV extends React.Component {
             be_price = "3000";
             af_price = "5000";   
         }
+        if(nation === 'Thai'){
+            bank = "TMB";
+        }
+        else if(nation === "Foreign"){
+            bank = "Paypal";
+        }
         const newUser = { 
             "paper_id": paper_id, 
             "paper_name": paper_name,
@@ -63,7 +69,8 @@ class importCSV extends React.Component {
             "af_price":af_price ,
             "Status" : "Unpaid",
             "Date" : new Date().toLocaleString('en-US', {
-              timeZone: 'Asia/Bangkok'})
+              timeZone: 'Asia/Bangkok'}),
+            "bank" :bank
             
         };
         userList.push(newUser);
