@@ -5,6 +5,11 @@ import { signin } from "../../helpers/auth";
 import firebase from "firebase";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { auth, db, checkAdmin } from "../../services/firebase";
+import a from "../../images/head.png";
+import b from "../../images/register.png";
+import c from "../../images/login.png";
+import d from "../../images/user.png";
+
 
 export function ReturnAdmin(isAdmin) {
   if (isAdmin) {
@@ -76,18 +81,18 @@ export default class Login extends Component {
         <nav className="navbar navbar-expand-lg navbar-light fixed-top">
           <div className="container">
             <a href="/">
-              <img src="/images/head.png" width="500px" />
+              <img src={a} width="500px" />
             </a>
             <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
               <ul className="navbar-nav ml-auto">
                 <li className="nav-item">
-                  <img src="/images/register.png" width="30px" />
+                  <img src={b} width="30px" />
                   <Link className="nav-link" to={"/register"}>
                     REGISTER
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <img src="/images/login.png" width="30px" />
+                  <img src={c} width="30px" />
                   <Link className="nav-link" to={"/Status"}>
                     LOGIN
                   </Link>
@@ -99,7 +104,7 @@ export default class Login extends Component {
         <div className="auth-wrapper-log">
           <div className="auth-inner-log">
             <div class="text-center">
-              <img src="/images/user.png" width="70px" />
+              <img src={d} width="70px" />
             </div>
             <div className="textlog">
               <p>LOGIN</p>
