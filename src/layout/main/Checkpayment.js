@@ -88,7 +88,7 @@ class Checkpayment extends React.Component {
                       <th>Price</th>
                       {/* <th>Date</th> */}
                       <th>Status Payment</th>
-                      <th>Late</th>
+                      {/* <th>Late</th> */}
                   </tr>
               </thead>
               <tbody>  
@@ -104,7 +104,7 @@ class Checkpayment extends React.Component {
                         {/* <td>{data.Status}</td> */}
                         {/* <td>{data.Date}</td> */}
                         <td><input style={{}} className="w3-input-transparent" type="submit" id={index} value={Btn(data.Status)}onClick={this.mySubmitHandler} /></td>
-                        {/* <td><input style={{}} className="w3-input-transparent" type="submit" id={index} value={Btn(data.Status)}onClick={this.mySubmitHandler} /></td> */}
+                        {/* <td><input style={{}} className="w3-input-transparent" type="submit" id={index} value={("Email")}onClick={this.mySubmitHandler} /></td> */}
 
                       </tr> 
                   );
