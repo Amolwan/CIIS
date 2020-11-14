@@ -25,14 +25,13 @@ class Status extends React.Component {
         {
 
           Resercherlist.push(snap.val());
-    
-        
         }
         // {console.log(snap.key)}
       })
       // console.log(Resercherlist);
       this.setState({datalist : Resercherlist});
     })
+    
   }
 
   mySubmitHandler(event){

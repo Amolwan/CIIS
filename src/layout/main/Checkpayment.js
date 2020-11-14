@@ -23,9 +23,10 @@ function Btn(data){
 class Checkpayment extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {datalist : []};
+    this.state = {datalist : [],dataUser: []};
     this.database = firebase.database();
     this.mySubmitHandler = this.mySubmitHandler.bind(this);
+    this.mySubmitUser = this.mySubmitUser.bind(this);
   }
   componentDidMount(){
    
@@ -41,12 +42,24 @@ class Checkpayment extends React.Component {
       // console.log(Resercherlist);
       this.setState({datalist : Resercherlist});
     })
+    firebase.database().ref('User/').on("value",snapshot => {
+      let Resercherlist = [];
+      snapshot.forEach(snap => {
+          Resercherlist.push(snap.val());
+        // {console.log(snap.key)}
+      })
+      // console.log(Resercherlist);
+      this.setState({dataUser : Resercherlist});
+    })
   }
+
+  
 
   mySubmitHandler(event){
     event.preventDefault();
     console.log([event.target.id])
     console.log(this.state.datalist[event.target.id].note_id)
+    
     firebase.database().ref('usersCCSV/').once("value",snapshot => {
       snapshot.forEach(snap => {
         if(snap.val().paper_name == this.state.datalist[event.target.id].paper_name)
@@ -72,7 +85,37 @@ class Checkpayment extends React.Component {
     })
     alert("You are submitting " + this.state.datalist[event.target.id].f_name);
   }
-  
+  mySubmitUser(event){
+    // event.preventDefault();
+    // console.log([event.target.id])
+    // console.log(this.state.datalist[event.target.id].note_id)
+    
+    // firebase.database().ref('User/').once("value",snapshot => {
+    //   snapshot.forEach(snap => {
+    //     if(snap.val().id === this.state.dataUser[event.target.id].id && snap.val().fname === this.state.dataUser[event.target.id].fname)
+    //     {
+    //       if(snap.val().paid.status === "0")
+    //       {
+    //         let userRef = this.database.ref('User/' + snap.key)
+    //         userRef.update({'status': "2"});
+    //         userRef.update({'Status_AD': "0"});
+    //         userRef.update({'admin' : firebase.auth().currentUser.email})
+
+    //         return
+    //       }
+    //       else
+    //       {
+    //         let userRef = this.database.ref('User/' + snap.key)
+    //         userRef.update({'Status': "Unpaid"});
+    //         userRef.update({'Status_AD': "0"});
+    //         return
+    //       }
+    //     }
+    //   })
+    //   // console.log(data.key)
+    // })
+    // alert("You are submitting " + this.state.datalist[event.target.id].f_name);
+  }
   render(){
     return (
       <div  class="page-content">
@@ -102,6 +145,7 @@ class Checkpayment extends React.Component {
                         <td>{data.f_name +" "+ data.l_name}</td>
                         <td>{data.be_price}</td>
                         {/* <td>{data.Status}</td> */}
+                        
                         {/* <td>{data.Date}</td> */}
                         <td><input style={{}} className="w3-input-transparent" type="submit" id={index} value={Btn(data.Status)}onClick={this.mySubmitHandler} /></td>
                         {/* <td><input style={{}} className="w3-input-transparent" type="submit" id={index} value={("Email")}onClick={this.mySubmitHandler} /></td> */}
@@ -110,7 +154,24 @@ class Checkpayment extends React.Component {
                   );
                   
                   })}
-              
+              {this.state.dataUser.map((data,index) => {
+                // {console.log(index)}
+                  return (
+                      <tr> 
+                        {/* {console.log(data.paid)} */}
+                        {/* {console.log(data)} */}
+                        <td>{data.fname}</td>
+                        <td>{data.fname +" "+ data.lname}</td>
+                        <td>{data.paid.price}</td>
+                        {/* <td>{data.Status}</td> */}
+                        
+                        {/* <td>{data.Date}</td> */}
+                        <td><input style={{}} className="w3-input-transparent" type="submit" id={index} value={Btn(data.paid.status)}onClick={this.mySubmitUser} /></td>
+
+                      </tr> 
+                  );
+                  
+                  })}
               
               </tbody>
            </table>
