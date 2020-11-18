@@ -42,7 +42,7 @@ class Checkpayment extends React.Component {
       // console.log(Resercherlist);
       this.setState({datalist : Resercherlist});
     })
-    firebase.database().ref('User/').on("value",snapshot => {
+    firebase.database().ref('usersCCSV/').on("value",snapshot => {
       let Resercherlist = [];
       snapshot.forEach(snap => {
           Resercherlist.push(snap.val());
@@ -154,24 +154,7 @@ class Checkpayment extends React.Component {
                   );
                   
                   })}
-              {this.state.dataUser.map((data,index) => {
-                // {console.log(index)}
-                  return (
-                      <tr> 
-                        {/* {console.log(data.paid)} */}
-                        {/* {console.log(data)} */}
-                        <td>{data.fname}</td>
-                        <td>{data.fname +" "+ data.lname}</td>
-                        <td>{data.paid.price}</td>
-                        {/* <td>{data.Status}</td> */}
-                        
-                        {/* <td>{data.Date}</td> */}
-                        <td><input style={{}} className="w3-input-transparent" type="submit" id={index} value={Btn(data.paid.status)}onClick={this.mySubmitUser} /></td>
-
-                      </tr> 
-                  );
-                  
-                  })}
+              
               
               </tbody>
            </table>
